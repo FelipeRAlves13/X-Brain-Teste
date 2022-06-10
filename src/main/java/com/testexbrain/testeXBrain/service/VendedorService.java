@@ -71,7 +71,6 @@ public class VendedorService {
                             getTotalVendas(dataInicio, dataFinal, vendedor) / totalDeDias))
                                 .collect(Collectors.toList());
         return relatorioVenda;
-
     }
 
     private int getTotalVendas(LocalDate dataInicio, LocalDate dataFinal, Vendedor vendedor) {

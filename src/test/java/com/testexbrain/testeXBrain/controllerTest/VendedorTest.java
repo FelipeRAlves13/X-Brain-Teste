@@ -84,21 +84,25 @@ public class VendedorTest {
 
     @Test
     public void validaRelatorioPorData() throws Exception {
+        var vendedorDto = new VendedorDto();
+        vendedorDto.setNome("Vendedor Um");
+        vendedorDto.setId(1L);
+
         var relatorio = new RelatorioVendaDto();
-        relatorio.setId(1L);
-        relatorio.setNome("Vendedor Um");
+        relatorio.setId(vendedorDto.getId());
+        relatorio.setNome(vendedorDto.getNome());
         relatorio.setTotalVendas(4);
         relatorio.setMediaVendasDiarias(4);
 
-        LocalDate dataInicial = LocalDate.now();
-        LocalDate dataFinal = LocalDate.now();
+        LocalDate dataInicial = LocalDate.of(2022, 6, 10);
+        LocalDate dataFinal = LocalDate.of(2022, 6, 10);
 
         when(vendedorService.relatorio(dataInicial, dataFinal)).thenReturn(List.of(relatorio));
 
-        mockMvc.perform(get("/vendedor/relatorio?dataInicio=09/06/2022&dataFinal=09/06/2022"))
+        mockMvc.perform(get("/vendedor/relatorio?dataInicio=10/06/2022&dataFinal=10/06/2022"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0].id", is(1)))
                 .andExpect(jsonPath("$.[0].nome", is("Vendedor Um")))
+                .andExpect(jsonPath("$.[0].id", is(1)))
                 .andExpect(jsonPath("$.[0].totalVendas", is(4.0)))
                 .andExpect(jsonPath("$.[0].mediaVendasDiarias", is(4.0)));
     }

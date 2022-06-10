@@ -93,7 +93,7 @@ public class VendaTest {
     }
 
     @Test
-    public void validaExceptionQuandoVendaNaoLocalizadoAtualizar() throws Exception {
+    public void validaExceptionQuandoVendaNaoLocalizadaAtualizar() throws Exception {
         var vendaDto = new VendaDto();
         vendaDto.setValor(200F);
         vendaDto.setIdVenda(1L);
